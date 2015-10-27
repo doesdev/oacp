@@ -1,0 +1,26 @@
+{
+  "name": "oacp",
+  "version": "1.0.0",
+  "description": "Of A Certain Pattern - A framework of sorts",
+  "readme": "https://github.com/musocrat/oacp/blob/master/README.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/musocrat/oacp.git"
+  },
+  "author": "Andrew Carpenter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/musocrat/oacp/issues"
+  },
+  "homepage": "https://github.com/musocrat/oacp#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "jsonwebtoken": "^5.4.1",
+    "pg": "^4.4.3"
+  }
+}
