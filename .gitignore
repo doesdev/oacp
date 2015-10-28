@@ -1,6 +1,13 @@
 # Logs
 logs
 *.log
+npm-debug.log*
+
+# Secrets
+secrets.json
+database.json
+*.priv
+*.pub
 
 # Runtime data
 pids
@@ -23,5 +30,8 @@ coverage
 build/Release
 
 # Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+# https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
+
+# Temporary files
+tmp/
