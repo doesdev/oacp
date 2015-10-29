@@ -5,16 +5,19 @@ const Logger = require('./../lib/logger')
 const fs = require('fs')
 const info = require(path.join(appRoot, 'package.json'))
 var config = {app: {}}
+config.appRoot = appRoot
+config.configPath = path.join(appRoot, 'config')
+config.secrets = require(path.join(config.configPath, 'secrets.json'))
 config.app.name = info.name
 config.app.ns = config.app.namespace = (info.namespace || info.name)
   .replace(/\.?([A-Z]+)/g, (x, y) => (' ' + y)).trim()
   .replace(/\s+/g, '_').toLowerCase()
 config.app.version = info.version
-const privKeyPath = path.join(appRoot, 'config', config.app.ns + '.priv')
+const privKeyPath = path.join(config.configPath, config.app.ns + '.priv')
 try {
   config.privKey = fs.readFileSync(privKeyPath)
 } catch (e) {}
-const pubKeyPath = path.join(appRoot, 'config', config.app.ns + '.pub')
+const pubKeyPath = path.join(config.configPath, config.app.ns + '.pub')
 try {
   config.pubKey = fs.readFileSync(pubKeyPath)
 } catch (e) {}
