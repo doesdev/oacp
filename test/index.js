@@ -13,9 +13,9 @@ describe('Oacp', function () {
       assert.equal(app.constructor.name, 'oacp')
     )
   )
-  describe('app.namespace', () =>
+  describe('app._ns', () =>
     it('should equal namespace', () =>
-      assert.equal(app.namespace, namespace)
+      assert.equal(app._ns, namespace)
     )
   )
   describe('app.registerModel(User)', function () {
@@ -35,6 +35,9 @@ describe('Oacp', function () {
     )
     it('should inherit from EventEmitter', () =>
       assert(user.emit instanceof Function)
+    )
+    it('should have _ns equal to namespace', () =>
+      assert.equal(user._ns, namespace)
     )
   })
 })
