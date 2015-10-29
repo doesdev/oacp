@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/musocrat/oacp#readme",
   "dependencies": {
+    "app-root-path": "^1.0.0",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "jsonwebtoken": "^5.4.1",
@@ -28,6 +29,9 @@
     "mocha": "^2.3.3"
   },
   "standard": {
-    "global": [ "describe", "it" ]
+    "global": [
+      "describe",
+      "it"
+    ]
   }
 }
