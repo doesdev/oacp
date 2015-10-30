@@ -3,8 +3,6 @@ const namespace = 'testapp'
 const Oacp = require('./../index')
 var app = new Oacp(namespace)
 const assert = require('assert')
-// Mock model
-// function User () {}
 
 // Tests
 describe('Oacp', function () {
