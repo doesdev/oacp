@@ -7,7 +7,7 @@ function oacp (namespace) {
 }
 // oacp.prototype.Server = require('./lib/server')
 oacp.prototype.registerModel = function (model) {
-  require('./lib/model')(this._ns, model)
+  return require('./lib/model')(this._ns, model)
 }
 // oacp.prototype.Controller = require('./lib/controller')
 

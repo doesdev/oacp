@@ -4,7 +4,7 @@ const Oacp = require('./../index')
 var app = new Oacp(namespace)
 const assert = require('assert')
 // Mock model
-function User () {}
+// function User () {}
 
 // Tests
 describe('Oacp', function () {
@@ -19,15 +19,17 @@ describe('Oacp', function () {
     )
   )
   describe('app.registerModel(User)', function () {
-    app.registerModel(User)
+    const User = app.registerModel('User')
+    // app.registerModel(User)
     it('should extend Record on User', () =>
       assert(User.find instanceof Function)
     )
   })
   describe('User.new()', function () {
-    app.registerModel(User)
+    const User = app.registerModel('User')
+    // app.registerModel(User)
     var user = User.new()
-    it('should return instance of User', () =>
+    it('should be instance of User', () =>
       assert.equal(user.constructor.name, 'User')
     )
     it('should inherit from Record', () =>
