@@ -23,7 +23,7 @@ try {
 } catch (e) {}
 
 var loggerOpts = {
-  appName: info.name,
+  appName: config.app.ns,
   toConsole: true,
   toFile: true,
   loglevel: 'debug',

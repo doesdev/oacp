@@ -1,15 +1,23 @@
 // Setup
-var config = require('./config/app')
-function oacp (namespace) {
-  var self = this
-  self._ns = namespace || config.app.namespace
-  return self
-}
-// oacp.prototype.Server = require('./lib/server')
-oacp.prototype.registerModel = function (model) {
-  return require('./lib/model')(this._ns, model)
-}
-// oacp.prototype.Controller = require('./lib/controller')
+const HTTPServer = require('./lib/http_server')
 
 // Exports
-module.exports = oacp
+module.exports = Oacp
+
+// Oacp Constructor
+function Oacp (namespace) {
+  var self = this
+  self.models = {}
+  self.config = require('./config/app')
+  self._ns = namespace || self.config.app.namespace
+  self.server = {http: new HTTPServer(self)}
+  return self
+}
+
+// Component Registration
+Oacp.prototype.registerModel = function (model) {
+  var app = this
+  var thisModel = require('./lib/model')(app, model)
+  app.models[thisModel.name] = thisModel
+  return thisModel
+}
