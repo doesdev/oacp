@@ -3,6 +3,7 @@ const namespace = 'testapp'
 const Oacp = require('./../index')
 var app = new Oacp(namespace)
 const assert = require('assert')
+const http = require('http')
 
 // Tests
 describe('Oacp', function () {
@@ -26,7 +27,7 @@ describe('Oacp', function () {
       assert.equal(app._ns, namespace)
     )
   )
-  describe('app.registerModel(User)', function () {
+  describe('app.registerModel(\'User\')', function () {
     const User = app.registerModel('User')
     it('should extend Record on User', () =>
       assert(User.find instanceof Function)
@@ -38,7 +39,7 @@ describe('Oacp', function () {
   describe('User.new()', function () {
     const User = app.registerModel('User')
     var user = User.new()
-    it('should be instance of User', () =>
+    it('should be instance of User::Record', () =>
       assert.equal(user.constructor.name, 'User')
     )
     it('should inherit from Record', () =>
@@ -50,5 +51,26 @@ describe('Oacp', function () {
     it('should have _ns equal to namespace', () =>
       assert.equal(user._ns, namespace)
     )
+  })
+  describe('userChannel = app.registerChannel(\'User\')', function () {
+    var userChannel = app.registerChannel('User')
+    it('should be instance of User::Channel', () =>
+      assert.equal(userChannel.constructor.name, 'User')
+    )
+    it('should have Channel instance methods', () =>
+      assert(userChannel.initRoutes instanceof Function)
+    )
+  })
+  describe('userChannel.http: route -> /user/_validate', function () {
+    var result = false
+    beforeEach(function getRequest (done) {
+      http.get('http://localhost:8080/user/_validate', function (res) {
+        res.on('data', function (data) {
+          result = data.toString() === 'true'
+          done()
+        })
+      }).on('error', (err) => done(err))
+    })
+    it('should return true', () => assert(result))
   })
 })

@@ -31,7 +31,8 @@
   "standard": {
     "global": [
       "describe",
-      "it"
+      "it",
+      "beforeEach"
     ]
   }
 }
