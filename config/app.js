@@ -4,7 +4,7 @@ const appRoot = require('app-root-path').toString()
 const Logger = require('./../lib/logger')
 const fs = require('fs')
 const info = require(path.join(appRoot, 'package.json'))
-const oacpConf = info.oacp || {}
+const oacpConf = info.oacp || {jwt: {}}
 
 // Export config
 module.exports = function (ns) {
@@ -12,7 +12,7 @@ module.exports = function (ns) {
   config.appRoot = appRoot
   config.configPath = path.join(appRoot, 'config')
   config.secrets = require(path.join(config.configPath, 'secrets.json'))
-  config.jwt.issuer = oacpConf.issuer
+  config.jwt.issuer = oacpConf.jwt.issuer
   config.app.name = info.name
   config.app.ns = config.app.namespace = (ns || oacpConf.namespace || info.name)
     .replace(/\.?([A-Z]+)/g, (x, y) => (' ' + y)).trim()
