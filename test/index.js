@@ -72,7 +72,7 @@ describe('Oacp', function () {
       assert(userChannel.emit instanceof Function)
     )
   })
-  describe('userChannel.http: route -> /user/_validate', function () {
+  describe('userChannel.http: route -> GET /user/_validate', function () {
     var result = false
     beforeEach(function getRequest (done) {
       http.get('http://localhost:8080/user/_validate', function (res) {
@@ -83,5 +83,17 @@ describe('Oacp', function () {
       }).on('error', (err) => done(err))
     })
     it('should return true', () => assert(result))
+  })
+  describe('userChannel.http: route -> GET /user, no token', function () {
+    var result = false
+    beforeEach(function getRequest (done) {
+      http.get('http://localhost:8080/user', function (res) {
+        res.on('data', function (data) {
+          result = res.statusCode === 401
+          done()
+        })
+      }).on('error', (err) => done(err))
+    })
+    it('should return 401 status', () => assert(result))
   })
 })
