@@ -52,6 +52,14 @@ describe('Oacp', function () {
       assert.equal(user._ns, namespace)
     )
   })
+  describe('app.server.http', function () {
+    it('should be instance of HTTPServer', () =>
+      assert.equal(app.server.http.constructor.name, 'HTTPServer')
+    )
+    it('should inherit from EventEmitter', () =>
+      assert(app.server.http.emit instanceof Function)
+    )
+  })
   describe('userChannel = app.registerChannel(\'User\')', function () {
     var userChannel = app.registerChannel('User')
     it('should be instance of User::Channel', () =>
