@@ -57,8 +57,11 @@ describe('Oacp', function () {
     it('should be instance of User::Channel', () =>
       assert.equal(userChannel.constructor.name, 'User')
     )
-    it('should have Channel instance methods', () =>
+    it('should inherit from Channel', () =>
       assert(userChannel.initRoutes instanceof Function)
+    )
+    it('should inherit from EventEmitter', () =>
+      assert(userChannel.emit instanceof Function)
     )
   })
   describe('userChannel.http: route -> /user/_validate', function () {

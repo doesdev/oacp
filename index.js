@@ -9,8 +9,8 @@ function Oacp (namespace) {
   var self = this
   self.models = {}
   self.channels = {}
-  self.config = require('./config/app')
-  self._ns = namespace || self.config.app.namespace
+  self.config = require('./config/app')(namespace)
+  self._ns = self.config.app.namespace
   self.server = {http: new HTTPServer(self)}
   return self
 }

@@ -32,7 +32,10 @@ var loggerOpts = {
 createDir(loggerOpts.logBase)
 config.logger = new Logger(loggerOpts)
 
-module.exports = config
+module.exports = function (namespace) {
+  config.app.ns = config.app.namespace = namespace || config.app.ns
+  return config
+}
 
 // Helpers
 function createDir (dir) {
