@@ -17,6 +17,11 @@ describe('Oacp', function () {
       assert.equal(app.config.logger.constructor.name, 'Logger')
     )
   })
+  describe('app.config.app.namespace', function () {
+    it('should equal namespace', () =>
+      assert.equal(app.config.app.namespace, namespace)
+    )
+  })
   describe('app.server.http', function () {
     it('should be instance of HTTPServer', () =>
       assert.equal(app.server.http.constructor.name, 'HTTPServer')
