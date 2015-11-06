@@ -101,4 +101,23 @@ describe('Oacp', function () {
     })
     it('should return 401 status', () => assert(result))
   })
+  var whitelist = ['userid', 'username']
+  var userController = app.registerController('User', whitelist)
+  var ucd = 'userController = app.registerController(\'User\', whitelist)'
+  describe(ucd, function () {
+    it('should be instance of User::Channel', () =>
+      assert.equal(userController.constructor.name, 'User')
+    )
+    it('should inherit from Controller', () =>
+      assert(userController._listen instanceof Function)
+    )
+    it('should inherit from EventEmitter', () =>
+      assert(userController.emit instanceof Function)
+    )
+  })
+  describe('userController.constructor', function () {
+    it('should have \'username\' in whitelist', () =>
+      assert(userController.constructor.whitelist.indexOf('username') >= 0)
+    )
+  })
 })

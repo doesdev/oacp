@@ -4,11 +4,13 @@ const appRoot = require('app-root-path').toString()
 const Logger = require('./../lib/logger')
 const fs = require('fs')
 const info = require(path.join(appRoot, 'package.json'))
-const oacpConf = info.oacp || {jwt: {}}
+const oacpConf = info.oacp || {jwt: {}, env: {}}
+const accessPath = oacpConf.access || 'helpers/access.js'
 
 // Export config
 module.exports = function (ns) {
   var config = {app: {}, jwt: {}}
+  config.env = oacpConf.env
   config.appRoot = appRoot
   config.configPath = path.join(appRoot, 'config')
   config.secrets = require(path.join(config.configPath, 'secrets.json'))
@@ -38,6 +40,11 @@ module.exports = function (ns) {
   }
   createDir(loggerOpts.logBase)
   config.logger = new Logger(loggerOpts)
+  try {
+    config.access = require(path.join(appRoot, accessPath))
+  } catch (e) {
+    config.access = {allow: () => true}
+  }
   return config
 }
 

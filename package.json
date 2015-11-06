@@ -1,6 +1,13 @@
 {
   "name": "oacp",
-  "namespace": "oacp",
+  "oacp": {
+    "env": {},
+    "namespace": "oacp",
+    "access": "lib/access.js",
+    "jwt": {
+      "issuer": "oacp"
+    }
+  },
   "version": "1.0.0",
   "description": "Of A Certain Pattern - A framework of sorts",
   "readme": "https://github.com/musocrat/oacp/blob/master/README.md",
