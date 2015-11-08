@@ -18,7 +18,7 @@ module.exports = function (ns) {
   config.app.name = info.name
   config.app.ns = config.app.namespace = (ns || oacpConf.namespace || info.name)
     .replace(/\.?([A-Z]+)/g, (x, y) => (' ' + y)).trim()
-    .replace(/\s+/g, '_').toLowerCase()
+    .replace(/\s+|[,-;\[\]\\\/]/g, '_').toLowerCase()
   config.app.version = info.version
   const privKeyPath = oacpConf.jwt.privKeyPath ||
     path.join(config.configPath, config.app.ns + '.priv')

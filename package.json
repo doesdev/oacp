@@ -15,6 +15,9 @@
   "scripts": {
     "test": "test/index.js"
   },
+  "bin": {
+    "oacp" : "./bin/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/musocrat/oacp.git"
