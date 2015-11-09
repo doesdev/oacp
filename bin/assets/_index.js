@@ -1,2 +1,0 @@
-// Setup
-require('./api/index')
