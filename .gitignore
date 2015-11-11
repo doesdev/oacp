@@ -11,6 +11,7 @@ secrets.json
 database.json
 *.priv
 *.pub
+!oacp.pub
 
 # Runtime data
 pids

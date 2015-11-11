@@ -1,30 +1,36 @@
 // Setup
-const namespace = 'testapp'
+const namespace = 'oacp'
 const Oacp = require('./../index')
 var app = new Oacp(namespace)
+const PG = require('./helpers/_pg')
 const assert = require('assert')
-const http = require('http')
+const jwt = require('./helpers/_secrets.json').token
+const requester = require('./helpers/_requester')(jwt)
 
 // Tests
-describe('Oacp', function () {
+describe('Oacp', () => {
+  // OACP instance tests
   describe('app', () =>
     it('should be instance of Oacp', () =>
       assert.equal(app.constructor.name, 'Oacp')
     )
   )
-  describe('app.config.logger', function () {
+  describe('app.config.logger', () => {
     it('should be instance of Logger', () =>
       assert.equal(app.config.logger.constructor.name, 'Logger')
     )
   })
-  describe('app.config.app.namespace', function () {
+  describe('app.config.app.namespace', () => {
     it('should equal namespace', () =>
       assert.equal(app.config.app.namespace, namespace)
     )
   })
-  describe('app.server.http', function () {
+  describe('app.server.http', () => {
     it('should be instance of HTTPServer', () =>
       assert.equal(app.server.http.constructor.name, 'HTTPServer')
+    )
+    it('should inherit from EventEmitter', () =>
+      assert(app.server.http.emit instanceof Function)
     )
   })
   describe('app._ns', () =>
@@ -32,18 +38,18 @@ describe('Oacp', function () {
       assert.equal(app._ns, namespace)
     )
   )
-  describe('app.registerModel(\'User\')', function () {
-    const User = app.registerModel('User')
+  // Model class and instance tests
+  const UserModel = app.registerModel('User')
+  describe('app.registerModel(\'User\')', () => {
     it('should extend Record on User', () =>
-      assert(User.find instanceof Function)
+      assert(UserModel.find instanceof Function)
     )
     it('should set app.models.User to User', () =>
-      assert.equal(app.models.User.name, User.name)
+      assert.equal(app.models.User.name, UserModel.name)
     )
   })
-  describe('User.new()', function () {
-    const User = app.registerModel('User')
-    var user = User.new()
+  describe('User.new()', () => {
+    var user = UserModel.new()
     it('should be instance of User::Record', () =>
       assert.equal(user.constructor.name, 'User')
     )
@@ -57,16 +63,9 @@ describe('Oacp', function () {
       assert.equal(user._ns, namespace)
     )
   })
-  describe('app.server.http', function () {
-    it('should be instance of HTTPServer', () =>
-      assert.equal(app.server.http.constructor.name, 'HTTPServer')
-    )
-    it('should inherit from EventEmitter', () =>
-      assert(app.server.http.emit instanceof Function)
-    )
-  })
-  describe('userChannel = app.registerChannel(\'User\')', function () {
-    var userChannel = app.registerChannel('User')
+  // Channel instance tests
+  var userChannel = app.registerChannel('User')
+  describe('userChannel = app.registerChannel(\'User\')', () => {
     it('should be instance of User::Channel', () =>
       assert.equal(userChannel.constructor.name, 'User')
     )
@@ -77,34 +76,33 @@ describe('Oacp', function () {
       assert(userChannel.emit instanceof Function)
     )
   })
-  describe('userChannel.http: route -> GET /user/_validate', function () {
+  // Simple route tests
+  describe('route [GET]: /user/_validate', () => {
     var result = false
     beforeEach(function getRequest (done) {
-      http.get('http://localhost:8080/user/_validate', function (res) {
-        res.on('data', function (data) {
-          result = data.toString() === 'true'
-          done()
-        })
-      }).on('error', (err) => done(err))
+      requester('validate', false, (err, data) => {
+        result = !err && (data.toString() === 'true')
+        done(err)
+      })
     })
     it('should return true', () => assert(result))
   })
-  describe('userChannel.http: route -> GET /user, no token', function () {
+  describe('route [GET]: /user/1, no token', () => {
     var result = false
     beforeEach(function getRequest (done) {
-      http.get('http://localhost:8080/user', function (res) {
-        res.on('data', function (data) {
-          result = res.statusCode === 401
-          done()
-        })
-      }).on('error', (err) => done(err))
+      requester('read', false, (err, data, statusCode) => {
+        result = !err && (statusCode === 401)
+        done(err)
+      })
     })
     it('should return 401 status', () => assert(result))
   })
+  // Controller instance tests
   var whitelist = ['userid', 'username']
   var userController = app.registerController('User', whitelist)
+  userController.readRules = ['isAdmin']
   var ucd = 'userController = app.registerController(\'User\', whitelist)'
-  describe(ucd, function () {
+  describe(ucd, () => {
     it('should be instance of User::Channel', () =>
       assert.equal(userController.constructor.name, 'User')
     )
@@ -115,9 +113,21 @@ describe('Oacp', function () {
       assert(userController.emit instanceof Function)
     )
   })
-  describe('userController.constructor', function () {
+  describe('userController.constructor', () => {
     it('should have \'username\' in whitelist', () =>
       assert(userController.constructor.whitelist.indexOf('username') >= 0)
     )
+  })
+  // Workflow tests with mock PG calls
+  UserModel.PG = PG
+  describe('route [GET]: /user/1', () => {
+    var result = false
+    beforeEach(function getRequest (done) {
+      requester('read', true, (err, data) => {
+        result = !err && (JSON.parse(data.toString()).data.some_int === 123)
+        done(err)
+      })
+    })
+    it('should return data.some_int equal to 123', () => assert(result))
   })
 })
