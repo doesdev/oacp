@@ -26,10 +26,10 @@ Oacp.prototype.registerModel = function (model) {
 }
 
 // Register channel, returning instance of new channel
-Oacp.prototype.registerChannel = function (channel) {
+Oacp.prototype.registerChannel = function (channel, opts) {
   var app = this
   var Channel = require('./lib/channel')(app, channel)
-  var thisChannel = Channel.new()
+  var thisChannel = Channel.new(opts)
   app.channels[Channel.name] = thisChannel
   return thisChannel
 }
