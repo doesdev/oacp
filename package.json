@@ -4,7 +4,8 @@
     "env": {
       "port": 8080,
       "cors": {
-        "whitelist": ["*"]
+        "whitelist": ["*"],
+        "preflight": true
       }
     },
     "namespace": "oacp",
