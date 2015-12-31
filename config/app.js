@@ -11,6 +11,7 @@ const accessPath = oacpConf.access || 'helpers/access.js'
 module.exports = function (ns) {
   var config = {app: {}, jwt: {}}
   config.env = oacpConf.env
+  Object.keys(process.env).forEach((k) => { config.env[k] = process.env[k] })
   config.appRoot = appRoot
   config.configPath = path.join(appRoot, 'config')
   config.secrets = require(path.join(config.configPath, 'secrets.json'))

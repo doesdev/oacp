@@ -1,7 +1,12 @@
 {
   "name": "oacp",
   "oacp": {
-    "env": {},
+    "env": {
+      "port": 8080,
+      "cors": {
+        "whitelist": ["*"]
+      }
+    },
     "namespace": "oacp",
     "access": "lib/access.js",
     "jwt": {
@@ -28,9 +33,11 @@
   "dependencies": {
     "app-root-path": "^1.0.0",
     "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "jsonwebtoken": "^5.4.1",
-    "pg": "^4.4.3"
+    "pg": "^4.4.3",
+    "ws": "^0.8.0"
   },
   "devDependencies": {
     "mocha": "^2.3.3"
