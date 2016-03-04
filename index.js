@@ -35,9 +35,9 @@ Oacp.prototype.registerChannel = function (channel, opts) {
 }
 
 // Register controller, returning instance of new controller
-Oacp.prototype.registerController = function (controller, whitelist) {
+Oacp.prototype.registerController = function (controller, opts) {
   var app = this
-  var Controller = require('./lib/controller')(app, controller, whitelist)
+  var Controller = require('./lib/controller')(app, controller, opts)
   var thisController = Controller.new()
   app.controllers[Controller.name] = thisController
   return thisController
