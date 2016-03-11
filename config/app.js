@@ -30,7 +30,10 @@ module.exports = function (ns) {
     path.join(config.configPath, config.app.ns + '.pub')
   try {
     config.pubKey = fs.readFileSync(pubKeyPath)
-  } catch (e) {}
+  } catch (e) {
+    delete config.privKey
+    delete config.pubKey
+  }
 
   var loggerOpts = {
     appName: config.app.ns,
