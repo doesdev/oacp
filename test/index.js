@@ -99,7 +99,7 @@ describe('Oacp', () => {
   })
   // Controller instance tests
   var whitelist = ['userid', 'username']
-  var userController = app.registerController('User', whitelist)
+  var userController = app.registerController('User', {whitelist})
   userController.readRules = ['isAdmin']
   var ucd = 'userController = app.registerController(\'User\', whitelist)'
   describe(ucd, () => {
