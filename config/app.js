@@ -15,7 +15,7 @@ module.exports = function (ns) {
   config.appRoot = appRoot
   config.configPath = path.join(appRoot, 'config')
   config.secrets = require(path.join(config.configPath, 'secrets.json'))
-  config.jwt.issuer = oacpConf.jwt.issuer
+  config.jwt = oacpConf.jwt
   config.app.name = info.name
   config.app.ns = config.app.namespace = (ns || oacpConf.namespace || info.name)
     .replace(/\.?([A-Z]+)/g, (x, y) => (' ' + y)).trim()
