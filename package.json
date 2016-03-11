@@ -4,7 +4,9 @@
     "env": {
       "port": 8080,
       "cors": {
-        "whitelist": ["*"],
+        "whitelist": [
+          "*"
+        ],
         "preflight": true
       }
     },
@@ -32,16 +34,15 @@
   },
   "homepage": "https://github.com/musocrat/oacp#readme",
   "dependencies": {
-    "app-root-path": "^1.0.0",
-    "body-parser": "^1.14.1",
+    "app-root-path": "^1.2.0",
+    "body-parser": "^1.15.0",
     "cors": "^2.7.1",
-    "express": "^4.13.3",
-    "jsonwebtoken": "^5.4.1",
-    "pg": "^4.4.3",
-    "ws": "^0.8.0"
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
+    "pg": "^4.5.1"
   },
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "mocha": "^2.4.5"
   },
   "standard": {
     "global": [
