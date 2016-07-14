@@ -6,14 +6,15 @@ module.exports = Oacp
 
 // Oacp Constructor
 function Oacp (namespace) {
-  var self = this
-  self.models = {}
-  self.channels = {}
-  self.controllers = {}
-  self.config = require('./config/app')(namespace)
-  self._ns = self.config.app.namespace
-  self.server = {http: new HTTPServer(self)}
-  return self
+  var app = this
+  app.models = {}
+  app.channels = {}
+  app.controllers = {}
+  app.config = require('./config/app')(namespace)
+  app.PG = require('./lib/pg')(app, app.config)
+  app._ns = app.config.app.namespace
+  app.server = {http: new HTTPServer(app)}
+  return app
 }
 
 /* COMPONENT REGISTRATION */
