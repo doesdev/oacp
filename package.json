@@ -34,7 +34,6 @@
   },
   "homepage": "https://github.com/musocrat/oacp#readme",
   "dependencies": {
-    "app-root-path": "^1.2.1",
     "body-parser": "^1.15.2",
     "cors": "^2.7.1",
     "express": "^4.14.0",

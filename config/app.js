@@ -1,6 +1,6 @@
 // Setup
 const path = require('path')
-const appRoot = require('app-root-path').toString()
+const appRoot = process.cwd()
 const Logger = require('./../lib/logger')
 const fs = require('fs')
 const info = require(path.join(appRoot, 'package.json'))
