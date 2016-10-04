@@ -1,22 +1,6 @@
 {
   "name": "oacp",
-  "oacp": {
-    "env": {
-      "port": 8080,
-      "cors": {
-        "whitelist": [
-          "*"
-        ],
-        "preflight": true
-      }
-    },
-    "namespace": "oacp",
-    "access": "lib/access.js",
-    "jwt": {
-      "issuer": "oacp"
-    }
-  },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Of A Certain Pattern - A framework of sorts",
   "readme": "https://github.com/musocrat/oacp/blob/master/README.md",
   "main": "index.js",
@@ -36,13 +20,13 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
-    "cors": "^2.7.1",
+    "cors": "^2.8.1",
     "express": "^4.14.0",
-    "jsonwebtoken": "^7.0.1",
-    "pg": "^6.0.1"
+    "jsonwebtoken": "^7.1.9",
+    "pg": "^6.1.0"
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^3.1.0"
   },
   "standard": {
     "global": [
@@ -50,5 +34,21 @@
       "it",
       "beforeEach"
     ]
+  },
+  "oacp": {
+    "env": {
+      "port": 8080,
+      "cors": {
+        "whitelist": [
+          "*"
+        ],
+        "preflight": true
+      }
+    },
+    "namespace": "oacp",
+    "access": "lib/access.js",
+    "jwt": {
+      "issuer": "oacp"
+    }
   }
 }
