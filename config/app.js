@@ -1,7 +1,7 @@
 // Setup
 const path = require('path')
 const appRoot = process.cwd()
-const Logger = require('./../lib/logger')
+const logger = require('./../lib/logger')
 const fs = require('fs')
 const info = require(path.join(appRoot, 'package.json'))
 const oacpConf = info.oacp || {jwt: {}, env: {}}
@@ -40,11 +40,12 @@ module.exports = function (ns) {
     appName: config.app.ns,
     toConsole: true,
     toFile: true,
-    loglevel: 'debug',
+    logLevel: 'debug',
     logBase: path.join(appRoot, 'logs')
   }
   createDir(loggerOpts.logBase)
-  config.logger = new Logger(loggerOpts)
+  logger.setOpts(loggerOpts)
+  config.logger = logger
   try {
     config.access = require(path.join(appRoot, accessPath))
   } catch (e) {
