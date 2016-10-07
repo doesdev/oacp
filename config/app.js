@@ -4,7 +4,7 @@ const appRoot = process.cwd()
 const logger = require('./../lib/logger')
 const fs = require('fs')
 const info = require(path.join(appRoot, 'package.json'))
-const oacpConf = info.oacp || {jwt: {}, env: {}}
+const oacpConf = info.oacp || {jwt: {}, env: {}, logging: {}}
 const accessPath = oacpConf.access || 'helpers/access.js'
 
 // Export config
@@ -44,7 +44,7 @@ module.exports = function (ns) {
     logBase: path.join(appRoot, 'logs')
   }
   createDir(loggerOpts.logBase)
-  logger.setOpts(loggerOpts)
+  logger.setOpts(Object.assign(loggerOpts, oacpConf.logging || {}))
   config.logger = logger
   try {
     config.access = require(path.join(appRoot, accessPath))
