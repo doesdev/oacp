@@ -1,6 +1,6 @@
 {
   "name": "oacp",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Of A Certain Pattern - A framework of sorts",
   "readme": "https://github.com/musocrat/oacp/blob/master/README.md",
   "main": "index.js",
