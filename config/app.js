@@ -1,3 +1,5 @@
+'use strict'
+
 // Setup
 const path = require('path')
 const appRoot = process.cwd()
