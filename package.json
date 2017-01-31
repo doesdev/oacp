@@ -7,7 +7,7 @@
   "files": [
     "index.js",
     "config/app.js",
-    "lib",
+    "lib"
   ],
   "scripts": {
     "test": "mocha test/index.js"
