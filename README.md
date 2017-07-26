@@ -1,6 +1,8 @@
 # OACP - Of A Certain Pattern
 ## A framework of sorts
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/doesdev/oacp.svg)](https://greenkeeper.io/)
+
 ### It's SCRUD all the way down, and some Postgres too
 
 This library was built to fit a **very specific pattern.**
