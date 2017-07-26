@@ -28,7 +28,7 @@
     "cors": "^2.8.1",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.9",
-    "pg": "^6.1.0"
+    "pg": "^7.0.2"
   },
   "devDependencies": {
     "mocha": "^3.1.0"
