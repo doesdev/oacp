@@ -1,3 +1,9 @@
+# Don't Use This
+
+This was long abandoned in favor of the same pattern in a more optimal form.
+
+If you have been using this for some reason, please see [SCRUD](https://github.com/doesdev/scrud) as it is maintained and altogether better.
+
 # OACP - Of A Certain Pattern
 ## A framework of sorts
 
